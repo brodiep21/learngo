@@ -19,8 +19,9 @@ type user struct {
 }
 
 func main() {
-	if len(os.Args) < 2 {
+	if len(os.Args) != 3 {
 		fmt.Println(`Usage : [Username] [Password]`)
+		return
 	}
 	msg := os.Args[1:]
 	u := user{
