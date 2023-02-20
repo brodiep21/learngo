@@ -17,6 +17,28 @@ type user struct {
 	name string
 	pass string
 }
+type users struct {
+	users []user
+}
+
+var u = users{
+	[]user{
+		{
+			name: "jack",
+			pass: "butter",
+		},
+		{
+			name: "Brodie",
+			pass: "buffalo",
+		},
+	},
+}
+
+const (
+	accDenied = "Access denied for %s\n"
+	invPass   = "invalid password %s\n"
+	accessOK  = "Access granted for %s\n"
+)
 
 func main() {
 	if len(os.Args) != 3 {
@@ -28,13 +50,23 @@ func main() {
 		name: msg[0],
 		pass: msg[1],
 	}
+	checkUser(u)
 
-	if u.name != "Brodie" {
-		fmt.Printf("Access denied for %s\n", u.name)
+}
+
+func checkUser(msg user) {
+	if msg.name != u.users[0].name && msg.name != u.users[1].name {
+		fmt.Printf(accDenied, msg.name)
+		return
+	} else if msg.name == u.users[0].name && msg.pass != u.users[0].pass {
+		fmt.Printf(invPass, msg.pass)
+		return
+	} else if msg.name == u.users[1].name && msg.pass != u.users[1].pass {
+		fmt.Printf(invPass, msg.pass)
+		return
+	} else if msg.name == u.users[0].name && msg.pass == u.users[0].pass || msg.name == u.users[1].name && msg.pass == u.users[1].pass {
+		fmt.Printf(accessOK, msg.name)
+		return
 	}
-	if u.pass != "pogwart" {
-		fmt.Printf("invalid password %s\n", u.pass)
-	} else if u.name == "Brodie" && u.pass == "pogwart" {
-		fmt.Printf("Access granted for %s\n", u.name)
-	}
+
 }
