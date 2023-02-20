@@ -8,28 +8,32 @@
 
 package main
 
-// ---------------------------------------------------------
-// EXERCISE: Age Seasons
-//
-//  Let's start simple. Print the expected outputs,
-//  depending on the age variable.
-//
-// EXPECTED OUTPUT
-//  If age is greater than 60, print:
-//    Getting older
-//  If age is greater than 30, print:
-//    Getting wiser
-//  If age is greater than 20, print:
-//    Adulthood
-//  If age is greater than 10, print:
-//    Young blood
-//  Otherwise, print:
-//    Booting up
-// ---------------------------------------------------------
+import (
+	"fmt"
+	"os"
+)
+
+type user struct {
+	name string
+	pass string
+}
 
 func main() {
-	// Change this accordingly to produce the expected outputs
-	// age := 10
+	if len(os.Args) < 2 {
+		fmt.Println(`Usage : [Username] [Password]`)
+	}
+	msg := os.Args[1:]
+	u := user{
+		name: msg[0],
+		pass: msg[1],
+	}
 
-	// Type your if statement here.
+	if u.name != "Brodie" {
+		fmt.Printf("Access denied for %s\n", u.name)
+	}
+	if u.pass != "pogwart" {
+		fmt.Printf("invalid password %s\n", u.pass)
+	} else if u.name == "Brodie" && u.pass == "pogwart" {
+		fmt.Printf("Access granted for %s\n", u.name)
+	}
 }
