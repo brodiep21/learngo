@@ -58,10 +58,7 @@ func checkUser(msg user) {
 	if msg.name != u.users[0].name && msg.name != u.users[1].name {
 		fmt.Printf(accDenied, msg.name)
 		return
-	} else if msg.name == u.users[0].name && msg.pass != u.users[0].pass {
-		fmt.Printf(invPass, msg.pass)
-		return
-	} else if msg.name == u.users[1].name && msg.pass != u.users[1].pass {
+	} else if msg.pass != u.users[0].pass && msg.pass != u.users[1].pass {
 		fmt.Printf(invPass, msg.pass)
 		return
 	} else if msg.name == u.users[0].name && msg.pass == u.users[0].pass || msg.name == u.users[1].name && msg.pass == u.users[1].pass {
